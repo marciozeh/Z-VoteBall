@@ -19,7 +19,7 @@ export const FHEVoteDragonBall = () => {
   const { isConnected, chain } = useAccount();
   const chainId = chain?.id;
   const provider = useMemo(() => (typeof window !== "undefined" ? (window as any).ethereum : undefined), []);
-  const initialMockChains = { 11155111: "https://eth-sepolia.g.alchemy.com/v2/3ngecjoRNYwdMlsWw_Omc" };
+  const initialMockChains = { 11155111: `https://eth-sepolia.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_API_KEY}` };
   const { instance: fhevmInstance } = useFhevm({
     provider,
     chainId,
@@ -50,7 +50,7 @@ export const FHEVoteDragonBall = () => {
 
   if (!isConnected) {
     return (
-      <div className="max-w-4xl mx-auto p-8 text-gray-900 text-center">
+      <div className="max-w-4xl mx-auto p-8 text-gray-900 text-center flex items-center" style={{ height: 'calc(100vh - 60px)' }}>
         <div className="bg-white border shadow-xl rounded-xl p-10">
           <div className="text-4xl mb-4">⚠️</div>
           <h2 className="text-2xl font-bold mb-3">Wallet not connected</h2>
